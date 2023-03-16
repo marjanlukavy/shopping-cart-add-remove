@@ -11,10 +11,6 @@ export const deleteProduct = createAction<{
   productId: number;
 }>(Action.DeleteProduct);
 
-export const addProductToCart = createAction<{
-  productId: number;
-}>(Action.AddProduct);
-
 const initialState: ProductsState = {
   items: [],
   loading: false,
@@ -22,7 +18,6 @@ const initialState: ProductsState = {
   cart: [],
   cartAmount: 0,
 };
-
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -39,26 +34,7 @@ export const productsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    // update the product quantity, using id, and a specific 'quantity' value.
-    builder.addCase(setProductQuantity, (state, action) => {
-      const { productId, quantity } = action.payload;
-      const item = state.cart.find((product) => product.id === productId);
-      if (item) {
-        item.quantity = quantity;
-
-        state.cartAmount = calculateTotalPrice(state.cart);
-      }
-    });
-    // remove the product by id
-    builder.addCase(deleteProduct, (state, action) => {
-      const { productId } = action.payload;
-      state.cart = state.cart.filter((product) => product.id !== productId);
-      state.cartAmount = calculateTotalPrice(state.cart);
-    });
-
-    builder.addCase(addProductToCart, (state, action) => {
+    addToCart: (state, action) => {
       const { productId } = action.payload;
 
       const product = state.items.find(
@@ -78,6 +54,24 @@ export const productsSlice = createSlice({
         }
         state.cartAmount = calculateTotalPrice(state.cart);
       }
+    },
+  },
+  extraReducers: (builder) => {
+    // update the product quantity, using id, and a specific 'quantity' value.
+    builder.addCase(setProductQuantity, (state, action) => {
+      const { productId, quantity } = action.payload;
+      const item = state.cart.find((product) => product.id === productId);
+      if (item) {
+        item.quantity = quantity;
+
+        state.cartAmount = calculateTotalPrice(state.cart);
+      }
+    });
+    // remove the product by id
+    builder.addCase(deleteProduct, (state, action) => {
+      const { productId } = action.payload;
+      state.cart = state.cart.filter((product) => product.id !== productId);
+      state.cartAmount = calculateTotalPrice(state.cart);
     });
   },
 });
@@ -86,6 +80,7 @@ export const {
   fetchProductsStart,
   fetchProductsSuccess,
   fetchProductsFailure,
+  addToCart,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
