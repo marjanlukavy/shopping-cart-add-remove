@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import { ProductItem } from "./styles/Cart.styles";
+import React from "react";
+import Cart from "./components/Cart/Cart";
+import Products from "./components/ProductContainer/Products";
+import styled from "styled-components";
+
+const AppContainer = styled.div`
+  position: relative;
+`;
 
 function App() {
   return (
-    <div>
-      <ProductItem>
-        <span>Nike</span>
-      </ProductItem>
-    </div>
+    <AppContainer>
+      <Products />
+      <Cart />
+    </AppContainer>
   );
 }
 
