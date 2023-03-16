@@ -2,6 +2,7 @@ export enum Action {
   FetchProductsStart = "products/fetchProductsStart",
   SetProductQuantity = "cart/setProductQuantity",
   DeleteProduct = "cart/deleteProduct",
+  AddProduct = "cart/addProduct",
 }
 
 export interface Product {
