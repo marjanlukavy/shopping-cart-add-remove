@@ -71,6 +71,7 @@ export const productsSlice = createSlice({
     builder.addCase(deleteProduct, (state, action) => {
       const { productId } = action.payload;
       state.cart = state.cart.filter((product) => product.id !== productId);
+      state.cartAmount = calculateTotalPrice(state.cart);
     });
   },
 });
