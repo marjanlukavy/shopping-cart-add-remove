@@ -11,6 +11,10 @@ export const deleteProduct = createAction<{
   productId: number;
 }>(Action.DeleteProduct);
 
+export const addProductToCart = createAction<{
+  productId: number;
+}>(Action.AddProduct);
+
 const initialState: ProductsState = {
   items: [],
   loading: false,
@@ -18,6 +22,7 @@ const initialState: ProductsState = {
   cart: [],
   cartAmount: 0,
 };
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -33,27 +38,6 @@ export const productsSlice = createSlice({
     fetchProductsFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-    addToCart: (state, action) => {
-      const { productId } = action.payload;
-
-      const product = state.items.find(
-        (product: Product) => product.id === productId
-      );
-
-      const isProductPresent = state.cart.find((cart) => cart.id === productId);
-      if (product) {
-        if (isProductPresent) {
-          state.cart = state.cart?.map((product) =>
-            product.id === productId
-              ? { ...product, quantity: product.quantity + 1 }
-              : product
-          );
-        } else {
-          state.cart = [...state.cart, { ...product, quantity: 1 }];
-        }
-        state.cartAmount = calculateTotalPrice(state.cart);
-      }
     },
   },
   extraReducers: (builder) => {
@@ -73,6 +57,28 @@ export const productsSlice = createSlice({
       state.cart = state.cart.filter((product) => product.id !== productId);
       state.cartAmount = calculateTotalPrice(state.cart);
     });
+
+    builder.addCase(addProductToCart, (state, action) => {
+      const { productId } = action.payload;
+
+      const product = state.items.find(
+        (product: Product) => product.id === productId
+      );
+
+      const isProductPresent = state.cart.find((cart) => cart.id === productId);
+      if (product) {
+        if (isProductPresent) {
+          state.cart = state.cart?.map((product) =>
+            product.id === productId
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
+          );
+        } else {
+          state.cart = [...state.cart, { ...product, quantity: 1 }];
+        }
+        state.cartAmount = calculateTotalPrice(state.cart);
+      }
+    });
   },
 });
 
@@ -80,7 +86,6 @@ export const {
   fetchProductsStart,
   fetchProductsSuccess,
   fetchProductsFailure,
-  addToCart,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
