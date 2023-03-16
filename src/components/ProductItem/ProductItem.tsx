@@ -1,17 +1,10 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "store/productsSlice";
 
-import { Product } from "utils/storeTypes";
-
+import { ProductItemProps } from "./types";
 import * as S from "./ProductItem.styles";
 
-const ProductItem = ({
-  title,
-  price,
-  image,
-  id,
-}: Pick<Product, "title" | "price" | "image" | "id">) => {
+const ProductItem = ({ title, price, image, id }: ProductItemProps) => {
   const dispatch = useDispatch();
 
   function handleAddToCart() {

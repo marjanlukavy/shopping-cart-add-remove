@@ -37,41 +37,40 @@ export const productsSlice = createSlice({
     addToCart: (state, action) => {
       const { productId } = action.payload;
 
-      const product = state.items.find((p: Product) => p.id === productId);
+      const product = state.items.find(
+        (product: Product) => product.id === productId
+      );
 
-      const isProductPresent = state?.cart?.find((p) => p.id === productId);
-
+      const isProductPresent = state.cart.find((cart) => cart.id === productId);
       if (product) {
         if (isProductPresent) {
-          state.cart = state.cart?.map((p) =>
-            p.id === productId ? { ...p, quantity: p.quantity + 1 } : p
+          state.cart = state.cart?.map((product) =>
+            product.id === productId
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
           );
         } else {
           state.cart = [...state.cart, { ...product, quantity: 1 }];
         }
-
         state.cartAmount = calculateTotalPrice(state.cart);
       }
     },
   },
-
   extraReducers: (builder) => {
     // update the product quantity, using id, and a specific 'quantity' value.
     builder.addCase(setProductQuantity, (state, action) => {
       const { productId, quantity } = action.payload;
-      const item = state.cart.find((p) => p.id === productId);
+      const item = state.cart.find((product) => product.id === productId);
       if (item) {
         item.quantity = quantity;
 
         state.cartAmount = calculateTotalPrice(state.cart);
       }
     });
-
     // remove the product by id
     builder.addCase(deleteProduct, (state, action) => {
       const { productId } = action.payload;
-
-      state.cart = state.cart.filter((p) => p.id !== productId);
+      state.cart = state.cart.filter((product) => product.id !== productId);
     });
   },
 });
