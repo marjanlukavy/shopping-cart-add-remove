@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
+import { addToCart } from "store/productsSlice";
 
 import { ProductItemProps } from "./types";
 import * as S from "./ProductItem.styles";
-import { addProductToCart } from "store/productsSlice";
 
 const ProductItem = ({ title, price, image, id }: ProductItemProps) => {
   const dispatch = useDispatch();
 
   function handleAddToCart() {
-    dispatch(addProductToCart({ productId: id }));
+    dispatch(addToCart({ productId: id }));
   }
   return (
     <S.ProductItemContainer>
