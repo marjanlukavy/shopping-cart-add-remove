@@ -1,15 +1,10 @@
+import React from "react";
 import { useDispatch } from "react-redux";
-import { setProductQuantity, deleteProduct } from "../../store/productsSlice";
+import { setProductQuantity, deleteProduct } from "store/productsSlice";
+import formatPrice from "utils/formatPrice";
 
-import {
-  CartItemContainer,
-  CartItemImage,
-  CartItemDetails,
-  CartItemTitle,
-  CartItemPrice,
-  QuantityInput,
-  RemoveButton,
-} from "./Cart.styles";
+import { ProductItemCartProps } from "./types";
+import * as S from "./Cart.styles";
 
 const ProductItemCart = ({
   title,
@@ -17,13 +12,7 @@ const ProductItemCart = ({
   image,
   quantity,
   id,
-}: {
-  title: string;
-  price: number;
-  id: number;
-  image: string;
-  quantity: number;
-}) => {
+}: ProductItemCartProps) => {
   const dispatch = useDispatch();
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newQuantity = Number(event.target.value);
@@ -35,28 +24,28 @@ const ProductItemCart = ({
   };
 
   return (
-    <CartItemContainer>
-      <CartItemImage src={image} alt={`product image of ${title}`} />
-      <CartItemDetails>
-        <CartItemTitle>{title}</CartItemTitle>
-        <CartItemPrice>Price: {price}$</CartItemPrice>
-        <CartItemPrice>
+    <S.CartItemContainer>
+      <S.CartItemImage src={image} alt={`product image of ${title}`} />
+      <S.CartItemDetails>
+        <S.CartItemTitle>{title}</S.CartItemTitle>
+        <S.CartItemPrice>{formatPrice(price)}</S.CartItemPrice>
+        <S.CartItemPrice>
           Quantity:
-          <QuantityInput
+          <S.QuantityInput
             type="number"
             min="1"
             value={quantity}
             onChange={handleQuantityChange}
           />
-        </CartItemPrice>
-        <RemoveButton
+        </S.CartItemPrice>
+        <S.RemoveButton
           onClick={handleProductDelate}
           aria-label={`Remove ${title} from cart`}
         >
           Remove
-        </RemoveButton>
-      </CartItemDetails>
-    </CartItemContainer>
+        </S.RemoveButton>
+      </S.CartItemDetails>
+    </S.CartItemContainer>
   );
 };
 

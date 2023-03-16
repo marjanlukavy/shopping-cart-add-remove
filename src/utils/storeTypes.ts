@@ -34,9 +34,3 @@ export interface ShoppingCartState {
   items: ShoppingCartItem[];
   total: number;
 }
-
-export interface CartState {
-  products: any;
-  cart: ShoppingCartItem[];
-  cartAmount: number;
-}

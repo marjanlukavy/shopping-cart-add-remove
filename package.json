@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "prettier": "prettier --write src/**/*.{js,jsx,ts,tsx,json,md}",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx} --quiet"
+    "lint": "eslint src/**/*.{ts,tsx} --quiet"
   },
   "eslintConfig": {
     "extends": [

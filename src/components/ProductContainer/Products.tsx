@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { fetchProductsStart } from "../../store/productsSlice";
-import { RootState } from "../../store/store";
+import { fetchProductsStart } from "store/productsSlice";
+
 import ProductItem from "../ProductItem/ProductItem";
 import { ProductsContainer } from "./ProductContainer.styles";
+import { selectAllProducts } from "store/selectors";
 
 const Products = () => {
-  const products = useSelector((state: RootState) => state.products);
+  const products = useSelector(selectAllProducts);
   const dispatch = useDispatch();
 
   useEffect(() => {

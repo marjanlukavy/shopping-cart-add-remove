@@ -1,31 +1,22 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
-import { RootState } from "../../store/store";
-
-import {
-  CartContainer,
-  TotalCartCost,
-  CloseCartContainer,
-} from "./Cart.styles";
 import ProductItemCart from "./ProductItem";
+import { selectCart, selectCartAmount } from "store/selectors";
+import * as S from "./Cart.styles";
 
 const Cart = () => {
-  const { cart, cartAmount } = useSelector(
-    (state: RootState) => state.products
-  );
+  const cart = useSelector(selectCart);
+  const cartAmount = useSelector(selectCartAmount);
 
   const [expanded, setExpanded] = useState(false);
 
   return (
     <>
       {expanded && cart.length ? (
-        <>
-          <CloseCartContainer onClick={() => setExpanded(false)} />
-        </>
+        <S.CloseCartContainer onClick={() => setExpanded(false)} />
       ) : null}
 
-      <CartContainer
+      <S.CartContainer
         expanded={expanded}
         arial-label={`cart  of ${cart.length} products`}
       >
@@ -41,12 +32,12 @@ const Cart = () => {
             />
           ))}
 
-        <TotalCartCost onClick={() => setExpanded(true)}>
+        <S.TotalCartCost onClick={() => setExpanded(true)}>
           <span>Items {cart.length} </span>
           &nbsp;
-          <span>${cart.length * cartAmount}</span>
-        </TotalCartCost>
-      </CartContainer>
+          {cart.length ? <span>${cartAmount}</span> : null}
+        </S.TotalCartCost>
+      </S.CartContainer>
     </>
   );
 };

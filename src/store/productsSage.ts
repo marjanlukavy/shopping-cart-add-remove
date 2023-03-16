@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { API_URL } from "../utils/config";
-import { Action } from "../utils/storeTypes";
+import { API_URL } from "utils/config";
+import { Action } from "utils/storeTypes";
 import { fetchProductsFailure, fetchProductsSuccess } from "./productsSlice";
 
 function* workGetProductsFetch(): Generator<any, any, any> {

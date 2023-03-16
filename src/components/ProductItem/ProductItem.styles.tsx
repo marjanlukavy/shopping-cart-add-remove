@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { COLORS } from "utils/colors";
 
 export const ShoppingCart = styled(HiOutlineShoppingCart)`
   width: 50px;
   height: auto;
-  color: white;
+  color: ${COLORS.white};
 `;
 
 export const ProductCartBackground = styled.div`
@@ -14,7 +15,7 @@ export const ProductCartBackground = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #514e4ead;
+  background-color: ${COLORS.productBackground};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +29,7 @@ export const AddProductDetails = styled.div`
   & > span {
     font-weight: bold;
     font-size: 21px;
-    color: white;
+    color: ${COLORS.white};
   }
 `;
 
@@ -36,16 +37,16 @@ export const ProductItemContainer = styled.div`
   width: 22%;
   flex-grow: 1;
   padding: 20px;
-  background-color: white;
-  border: 1px solid #b6afaf;
+  background-color: ${COLORS.white};
+  border: 1px solid ${COLORS.productBorder};
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   justify-content: space-between;
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px ${COLORS.boxShadow};
+    border: 1px solid ${COLORS.boxShadow};
     cursor: pointer;
 
     & > ${ProductCartBackground} {
@@ -74,7 +75,7 @@ export const ProductTitle = styled.span`
 `;
 
 export const ProductPrice = styled.span`
-  background-color: #eaeaea;
+  background-color: ${COLORS.grey};
   padding: 20px;
 `;
 
