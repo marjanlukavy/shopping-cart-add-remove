@@ -25,5 +25,3 @@ To use the application, follow these steps:
 2. Hover over the product you wish to purchase.
 3. Navigate to your cart by clicking the "Cart" link on your right.
 4. Adjust the quantity of each item using the "↓" and "↓" arrows, or remove items using the "Remove" button.
-
-This project is licensed under the MIT License. See the LICENSE.md file for details.
