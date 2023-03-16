@@ -1,11 +1,6 @@
-import React from "react";
-import Cart from "./components/Cart/Cart";
-import Products from "./components/ProductContainer/Products";
-import styled from "styled-components";
-
-const AppContainer = styled.div`
-  position: relative;
-`;
+import { AppContainer } from "App.styles";
+import Cart from "components/Cart/Cart";
+import Products from "components/ProductContainer/Products";
 
 function App() {
   return (

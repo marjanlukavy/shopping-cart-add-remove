@@ -16,7 +16,7 @@ const Products = () => {
   }, [dispatch]);
 
   return (
-    <ProductsContainer aria-label={`List of products`}>
+    <ProductsContainer aria-label="List of products">
       {products.items.map((product) => (
         <ProductItem
           key={product.id}
@@ -24,7 +24,7 @@ const Products = () => {
           title={product.title}
           price={product.price}
           image={product.image}
-          aria-label={`product`}
+          aria-label="product"
         />
       ))}
     </ProductsContainer>
